@@ -1,0 +1,80 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Регистрация</title>
+</head>
+<body>
+    <h2>Регистрация</h2>
+    <p>Для регистрации необходимо указать ваши персональные данные.</p>
+
+    <form id="registrationForm" onsubmit="return CheckData()">
+        <label>Имя: *</label>
+        <input type="text" id=" name">
+        <br><br>
+
+        <label>Организация (компания):</label>
+        <input type="text" id="company">
+        <br><br>
+
+        <label>Телефон:</label>
+        <input type="text" id="phone">
+        <br><br>
+
+        <label>Адрес электронной почты: *</label>
+        <input type="text" id="email">
+        <br><br>
+
+        <input type="submit" value="Отправить">
+        <input type="reset" value="Очистить">
+    </form>
+
+    <p>* Поля обязательные для заполнения</p>
+
+    <script>
+        function CheckData() {
+            let name = document.getElementById("name").value;
+            let company = document.getElementById("company").value;
+            let phone = document.getElementById("phone").value;
+            let email = document.getElementById("email").value;
+
+           
+            if (name.length === 0 || email.length === 0) {
+                alert("Заполните обязательные поля!");
+                return false;
+            }
+
+           
+            let emailPattern = new RegExp(
+                "^[A-Za-z0-9._-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$"
+            );
+
+            if (!emailPattern.test(email)) {
+                alert("Введите корректный адрес электронной почты!");
+                return false;
+            }
+
+      
+            let phonePattern = new RegExp(
+                "^[0-9]{11}$"
+            );
+
+            if (phone.length > 0 && !phonePattern.test(phone)) {
+                alert("Введите корректный номер телефона!");
+                return false;
+            }
+
+
+            let ans = confirm("Вы уверены, что хотите отправить введенные данные?");
+
+            if (ans) {
+                alert("Данные успешно проверены!");
+            }
+
+            return false;
+        }
+    </script>
+</body>
+</html>
+
